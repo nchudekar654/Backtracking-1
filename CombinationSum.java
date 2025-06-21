@@ -135,7 +135,37 @@ class Solution {
     }
 } 
 
+//Follow up: Permutation Sum. This will give all possible permutations
 
+class Solution {
+    private List<List<Integer>> result;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        this.result = new ArrayList<>();
+        helper(candidates,0, target, new ArrayList<>());
+        return result;
+    }
+
+    private void helper(int[] candidates, int pivot, int target, List<Integer> path){
+        //base
+            if(target == 0){
+                result.add(new ArrayList<>(path));
+                return;
+            }
+            if(target < 0 || pivot == candidates.length)
+                return;
+
+        //logic
+        for(int i = 0; i<candidates.length; i++){
+            //action
+            path.add(candidates[i]);
+            //recurse
+            helper(candidates, i, target-candidates[i], path);
+            //backtrack
+            path.remove(path.size()-1);
+
+        }
+    }
+}
 
 
 
